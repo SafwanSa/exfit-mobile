@@ -7,7 +7,7 @@ class ExercisesScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text('Exfit'),
       ),
-      body: Text('Hello World'),
+      body: Text(''),
     );
   }
 }

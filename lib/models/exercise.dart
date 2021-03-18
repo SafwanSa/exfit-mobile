@@ -1,4 +1,3 @@
-import 'package:enum_to_string/enum_to_string.dart';
 import 'package:flutter/material.dart';
 
 class Exercise {
@@ -11,6 +10,8 @@ class Exercise {
   final String difficulty;
   final String equipment;
   final String type;
+
+  // static List<Exercise> DUMMY = [Exercise()];
 
   Exercise({
     @required this.id,
