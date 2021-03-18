@@ -50,7 +50,7 @@ class ExerciseWidget extends StatelessWidget {
               icon: Icon(
                 Icons.add_box_rounded,
                 size: 45,
-                color: Theme.of(context).accentColor,
+                color: Theme.of(context).primaryColor,
               ),
               onPressed: () {},
             )
