@@ -9,11 +9,15 @@ class ScrolledTypes extends StatefulWidget {
 class _ScrolledTypesState extends State<ScrolledTypes> {
   final dummy = ['All', 'Chest', 'Biceps', 'Legs', 'Back', 'Stomach'];
 
-  var _muscleGroup = 'Chest';
+  var _currentTap = 'Chest';
 
-  void _changeMuscleGroup(String newMuscleGroup) {
+  bool _isCurrentTap(String tap) {
+    return _currentTap == tap;
+  }
+
+  void _changeCurrentTap(String newMuscleGroup) {
     setState(() {
-      _muscleGroup = newMuscleGroup;
+      _currentTap = newMuscleGroup;
     });
   }
 
@@ -30,7 +34,7 @@ class _ScrolledTypesState extends State<ScrolledTypes> {
           itemBuilder: (context, index) {
             return Bounce(
               onTap: () {
-                _changeMuscleGroup(dummy[index]);
+                _changeCurrentTap(dummy[index]);
               },
               child: Container(
                 alignment: Alignment.center,
@@ -38,7 +42,7 @@ class _ScrolledTypesState extends State<ScrolledTypes> {
                 padding: EdgeInsets.symmetric(horizontal: 10),
                 decoration: BoxDecoration(
                   color:
-                      _muscleGroup == dummy[index] ? Colors.grey : Colors.white,
+                      _isCurrentTap(dummy[index]) ? Colors.grey : Colors.white,
                   border: Border.all(
                     color: Colors.grey,
                     width: 2,
@@ -51,7 +55,7 @@ class _ScrolledTypesState extends State<ScrolledTypes> {
                   style: TextStyle(
                     fontSize: 19,
                     fontWeight: FontWeight.bold,
-                    color: _muscleGroup == dummy[index]
+                    color: _isCurrentTap(dummy[index])
                         ? Colors.white
                         : Colors.black,
                   ),
