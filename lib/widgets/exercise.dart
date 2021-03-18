@@ -25,7 +25,9 @@ class ExerciseWidget extends StatelessWidget {
                   showModalBottomSheet(
                       context: context,
                       builder: (context) {
-                        return ExerciseDetailsSheet();
+                        return ExerciseDetailsSheet(
+                          exercise: exercise,
+                        );
                       });
                 },
                 child: Container(
