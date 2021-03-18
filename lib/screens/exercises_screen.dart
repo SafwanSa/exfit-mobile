@@ -1,9 +1,9 @@
 import 'package:exfit/models/exercise.dart';
-import 'package:exfit/services/excercises_service.dart';
 import 'package:flutter/material.dart';
+import '../widgets/exercise.dart';
 
 class ExercisesScreen extends StatelessWidget {
-  List<Exercise> exercises = Exercise.DUMMY;
+  final List<Exercise> exercises = Exercise.DUMMY;
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +13,9 @@ class ExercisesScreen extends StatelessWidget {
       ),
       body: ListView.builder(
         itemBuilder: (context, index) {
-          return Text(exercises[index].name);
+          return ExerciseWidget(
+            exercise: exercises[index],
+          );
         },
         itemCount: exercises.length,
       ),
