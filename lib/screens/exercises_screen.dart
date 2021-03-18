@@ -9,7 +9,11 @@ class ExercisesScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text('Exfit'),
       ),
-      body: Text(''),
+      body: Column(
+        children: [
+          ...ExercisesService.exercises.map((ex) => Text(ex.name)).toList()
+        ],
+      ),
     );
   }
 }

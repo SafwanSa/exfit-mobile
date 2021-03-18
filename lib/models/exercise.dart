@@ -24,4 +24,18 @@ class Exercise {
     @required this.equipment,
     @required this.type,
   });
+
+  factory Exercise.fromJson(Map<String, dynamic> json) {
+    return Exercise(
+      id: json['id'].toString(),
+      name: json['name'],
+      muscleGroup: json['mainMuscleGroup'],
+      equipment: json['equipment'],
+      difficulty: json['difficulty'],
+      steps: json['steps'],
+      targetedMuscleImageUrl: json['targetedMImage'],
+      imagesUrls: [],
+      type: json['type'],
+    );
+  }
 }
