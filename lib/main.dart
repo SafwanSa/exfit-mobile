@@ -13,6 +13,7 @@ class MyApp extends StatelessWidget {
       title: 'Exfit',
       theme: ThemeData(
         primarySwatch: Colors.blue,
+        accentColor: Colors.amber,
       ),
       initialRoute: '/',
       routes: {
