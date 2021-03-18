@@ -1,4 +1,5 @@
 import 'package:exfit/models/exercise.dart';
+import 'package:exfit/widgets/difficulty.dart';
 import 'package:flutter/material.dart';
 
 class ExerciseDetailsSheet extends StatelessWidget {
@@ -12,12 +13,17 @@ class ExerciseDetailsSheet extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            exercise.name,
-            style: TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.w500,
-            ),
+          Row(
+            children: [
+              Text(
+                exercise.name,
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+              Spacer(),
+            ],
           ),
           Divider(),
           ListTile(
