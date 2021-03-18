@@ -1,4 +1,5 @@
 import 'package:exfit/animations/bounce.dart';
+import 'package:exfit/controllers/exercise.dart';
 import 'package:exfit/models/exercise.dart';
 import 'package:exfit/widgets/difficulty_level.dart';
 import 'package:exfit/widgets/exercise_details.dart';
@@ -6,6 +7,8 @@ import 'package:flutter/material.dart';
 
 class ExerciseWidget extends StatelessWidget {
   final Exercise exercise;
+  final ExerciseController exerciseController =
+      ExerciseController.exerciseController;
 
   ExerciseWidget({@required this.exercise});
 
@@ -57,7 +60,8 @@ class ExerciseWidget extends StatelessWidget {
                             DifficultyLevel(
                               length: 4,
                               size: 13,
-                              percentage: 0.6,
+                              percentage: exerciseController
+                                  .getPercentage(exercise.difficulty),
                             ),
                           ],
                         ),
