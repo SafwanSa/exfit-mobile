@@ -16,6 +16,6 @@ class ExercisesService {
     decodedData.forEach((item) {
       list.add(Exercise.fromJson((item)));
     });
-    // exercises = [...list];
+    exercises = [...list];
   }
 }
