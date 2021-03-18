@@ -1,5 +1,6 @@
 import 'package:exfit/animations/bounce.dart';
 import 'package:exfit/models/exercise.dart';
+import 'package:exfit/widgets/difficulty.dart';
 import 'package:exfit/widgets/exercise_details.dart';
 import 'package:flutter/material.dart';
 
@@ -53,12 +54,10 @@ class ExerciseWidget extends StatelessWidget {
                               ),
                             ),
                             SizedBox(height: 15),
-                            Text(
-                              exercise.difficulty,
-                              style: TextStyle(
-                                fontSize: 18,
-                                color: Colors.black38,
-                              ),
+                            DifficultyLevel(
+                              length: 4,
+                              size: 13,
+                              percentage: 0.6,
                             ),
                           ],
                         ),

@@ -1,11 +1,19 @@
 import 'package:flutter/material.dart';
 
 class DifficultyLevel extends StatelessWidget {
-  DifficultyLevel({this.size, this.length, this.percentage});
+  DifficultyLevel({
+    @required this.size,
+    @required this.length,
+    @required this.percentage,
+    this.borderRadius = 0,
+  });
 
   final double size;
   final int length;
   final double percentage;
+
+  final double borderRadius;
+
   final Color _red = Colors.red;
   final Color _green = Colors.green;
   final Color _orange = Colors.orange;
@@ -26,18 +34,24 @@ class DifficultyLevel extends StatelessWidget {
       child: Row(
           children: List.generate(length, (int index) {
         if (index < percentage * length) {
-          return Container(
-            margin: EdgeInsets.symmetric(horizontal: 0.5),
-            height: size,
-            width: size,
-            color: color,
+          return ClipRRect(
+            borderRadius: BorderRadius.circular(borderRadius),
+            child: Container(
+              margin: EdgeInsets.symmetric(horizontal: 0.5),
+              height: size,
+              width: size,
+              color: color,
+            ),
           );
         } else {
-          return Container(
-            margin: EdgeInsets.symmetric(horizontal: 0.5),
-            height: size,
-            width: size,
-            color: color.withOpacity(0.5),
+          return ClipRRect(
+            borderRadius: BorderRadius.circular(borderRadius),
+            child: Container(
+              margin: EdgeInsets.symmetric(horizontal: 0.5),
+              height: size,
+              width: size,
+              color: color.withOpacity(0.5),
+            ),
           );
         }
       })),
