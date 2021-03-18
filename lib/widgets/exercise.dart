@@ -1,5 +1,6 @@
 import 'package:exfit/animations/bounce.dart';
 import 'package:exfit/models/exercise.dart';
+import 'package:exfit/widgets/exercise_details.dart';
 import 'package:flutter/material.dart';
 
 class ExerciseWidget extends StatelessWidget {
@@ -20,7 +21,13 @@ class ExerciseWidget extends StatelessWidget {
             Expanded(
               flex: 1,
               child: Bounce(
-                onTap: () {},
+                onTap: () {
+                  showModalBottomSheet(
+                      context: context,
+                      builder: (context) {
+                        return ExerciseDetailsSheet();
+                      });
+                },
                 child: Container(
                   color: Colors.transparent,
                   child: Row(
