@@ -1,3 +1,4 @@
+import 'package:exfit/animations/bounce.dart';
 import 'package:flutter/material.dart';
 
 class ScrolledTypes extends StatefulWidget {
@@ -27,7 +28,7 @@ class _ScrolledTypesState extends State<ScrolledTypes> {
           scrollDirection: Axis.horizontal,
           itemCount: dummy.length,
           itemBuilder: (context, index) {
-            return GestureDetector(
+            return Bounce(
               onTap: () {
                 _changeMuscleGroup(dummy[index]);
               },
