@@ -1,5 +1,5 @@
 import 'package:exfit/models/exercise.dart';
-import 'package:exfit/widgets/search.dart';
+import '../widgets/scrolled_types.dart';
 import 'package:flutter/material.dart';
 import '../widgets/exercise.dart';
 
@@ -21,7 +21,7 @@ class ExercisesScreen extends StatelessWidget {
         body: Container(
           child: Column(
             children: [
-              Search(),
+              ScrolledTypes(),
               Expanded(
                 child: ListView.builder(
                   padding: EdgeInsets.all(5),

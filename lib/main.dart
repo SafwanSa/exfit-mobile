@@ -12,9 +12,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Exfit',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
-        accentColor: Colors.amber,
-      ),
+          primarySwatch: Colors.blueGrey,
+          accentColor: Colors.black45,
+          errorColor: Colors.redAccent),
       initialRoute: '/',
       routes: {
         '/': (_) => ExercisesScreen(),
