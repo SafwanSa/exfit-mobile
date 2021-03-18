@@ -1,6 +1,6 @@
 import 'package:exfit/animations/bounce.dart';
 import 'package:exfit/models/exercise.dart';
-import 'package:exfit/widgets/difficulty.dart';
+import 'package:exfit/widgets/difficulty_level.dart';
 import 'package:exfit/widgets/exercise_details.dart';
 import 'package:flutter/material.dart';
 

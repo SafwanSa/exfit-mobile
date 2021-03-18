@@ -1,5 +1,5 @@
 import 'package:exfit/models/exercise.dart';
-import 'package:exfit/widgets/difficulty.dart';
+
 import 'package:flutter/material.dart';
 
 class ExerciseDetailsSheet extends StatelessWidget {
