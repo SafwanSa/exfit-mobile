@@ -7,7 +7,7 @@ class ScrolledTypes extends StatefulWidget {
 }
 
 class _ScrolledTypesState extends State<ScrolledTypes> {
-  final dummy = ['All', 'Chest', 'Biceps', 'Legs', 'Back', 'Stomach'];
+  List<String> dummy = ['All', 'Chest', 'Biceps', 'Legs', 'Back', 'Stomach'];
 
   var _currentTap = 'Chest';
 
@@ -19,6 +19,11 @@ class _ScrolledTypesState extends State<ScrolledTypes> {
     setState(() {
       _currentTap = newMuscleGroup;
     });
+  }
+
+  @override
+  void initState() {
+    super.initState();
   }
 
   @override
