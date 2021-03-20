@@ -4,18 +4,19 @@ import 'package:exfit/models/exercise.dart';
 import 'package:http/http.dart' as http;
 
 class ExercisesService {
-  static List<Exercise> exercises = [];
-  static Future<http.Response> fetchExercises() {
-    return http.get(Uri.http('localhost:3000', '/api/exercises/'));
-  }
-
-  static void loadData() async {
-    final res = await fetchExercises();
+  Future<List<Exercise>> fetchData(int limit, int page) async {
+    final response =
+        await http.get(Uri.http('localhost:3000', '/api/exercises/', {
+      'limit': limit.toString(),
+      'page': page.toString(),
+    }));
     final List<Exercise> list = [];
-    final List<Object> decodedData = json.decode(res.body);
-    decodedData.forEach((item) {
+    final Map<String, Object> decodedData = json.decode(response.body);
+    final List<dynamic> decodedExercises = decodedData['exercises'];
+    decodedExercises.forEach((item) {
       list.add(Exercise.fromJson((item)));
     });
-    exercises = [...list];
+    print(list[0].imagesUrls);
+    return list;
   }
 }

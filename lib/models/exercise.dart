@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 
 import 'package:uuid/uuid.dart';
@@ -82,7 +84,7 @@ class Exercise {
       difficulty: json['difficulty'],
       steps: json['steps'],
       targetedMuscleImageUrl: json['targetedMImage'],
-      imagesUrls: [],
+      imagesUrls: List.from(json['images']),
       type: json['type'],
     );
   }
