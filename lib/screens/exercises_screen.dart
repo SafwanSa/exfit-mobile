@@ -10,7 +10,40 @@ class ExercisesScreen extends StatefulWidget {
 }
 
 class _ExercisesScreenState extends State<ExercisesScreen> {
+  final List<Exercise> _exercises = [];
   final ExercisesService exercisesService = ExercisesService();
+
+  bool _hasMore = false;
+  bool _isLoading = false;
+
+  int _page = 0;
+
+  @override
+  void initState() {
+    _isLoading = true;
+    _hasMore = true;
+    super.initState();
+    _loadMore();
+  }
+
+  void _loadMore() {
+    print('load more data');
+    _isLoading = true;
+    _page++;
+    exercisesService.fetchData(5, _page).then((List<Exercise> fetchedList) {
+      if (fetchedList.isEmpty) {
+        setState(() {
+          _isLoading = false;
+          _hasMore = false;
+        });
+      } else {
+        setState(() {
+          _isLoading = false;
+          _exercises.addAll(fetchedList);
+        });
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -29,27 +62,23 @@ class _ExercisesScreenState extends State<ExercisesScreen> {
             children: [
               ScrolledTypes(),
               Expanded(
-                child: FutureBuilder(
-                  future: exercisesService.fetchData(5, 1),
-                  builder: (context, AsyncSnapshot<List<Exercise>> snapshot) {
-                    if (snapshot.hasData) {
-                      final List<Exercise> exercises = snapshot.data;
-
-                      return ListView.builder(
-                        padding: EdgeInsets.all(5),
-                        itemBuilder: (context, index) {
-                          return ExerciseWidget(
-                            exercise: exercises[index],
-                          );
-                        },
-                        itemCount: exercises.length,
-                      );
-                    } else {
+                child: ListView.builder(
+                  padding: EdgeInsets.all(5),
+                  itemBuilder: (context, index) {
+                    if (index >= _exercises.length) {
+                      if (!_isLoading) {
+                        _loadMore();
+                      }
                       return Center(
                         child: CircularProgressIndicator(),
                       );
                     }
+                    return ExerciseWidget(
+                      exercise: _exercises[index],
+                    );
                   },
+                  itemCount:
+                      _hasMore ? _exercises.length + 1 : _exercises.length,
                 ),
               ),
             ],
