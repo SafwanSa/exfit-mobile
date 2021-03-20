@@ -16,7 +16,6 @@ class ExercisesService {
     decodedExercises.forEach((item) {
       list.add(Exercise.fromJson((item)));
     });
-    print(list[0].imagesUrls);
     return list;
   }
 }
