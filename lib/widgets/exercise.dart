@@ -49,11 +49,14 @@ class ExerciseWidget extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(
-                              exercise.name,
-                              style: TextStyle(
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold,
+                            SizedBox(
+                              width: 200,
+                              child: Text(
+                                exercise.name,
+                                style: TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold,
+                                ),
                               ),
                             ),
                             SizedBox(height: 15),
