@@ -1,4 +1,5 @@
 import 'package:exfit/animations/bounce.dart';
+import 'package:exfit/services/muscles_services.dart';
 import 'package:flutter/material.dart';
 
 class ScrolledTypes extends StatefulWidget {
@@ -7,9 +8,10 @@ class ScrolledTypes extends StatefulWidget {
 }
 
 class _ScrolledTypesState extends State<ScrolledTypes> {
-  List<String> dummy = ['All', 'Chest', 'Biceps', 'Legs', 'Back', 'Stomach'];
+  final MusclesService musclesService = MusclesService();
+  List<String> muscles = ['All'];
 
-  var _currentTap = 'Chest';
+  var _currentTap = 'All';
 
   bool _isCurrentTap(String tap) {
     return _currentTap == tap;
@@ -23,6 +25,7 @@ class _ScrolledTypesState extends State<ScrolledTypes> {
 
   @override
   void initState() {
+    musclesService.fetchData().then((value) => muscles.addAll(value));
     super.initState();
   }
 
@@ -35,19 +38,20 @@ class _ScrolledTypesState extends State<ScrolledTypes> {
         child: ListView.builder(
           padding: EdgeInsets.all(5),
           scrollDirection: Axis.horizontal,
-          itemCount: dummy.length,
+          itemCount: muscles.length,
           itemBuilder: (context, index) {
             return Bounce(
               onTap: () {
-                _changeCurrentTap(dummy[index]);
+                _changeCurrentTap(muscles[index]);
               },
               child: Container(
                 alignment: Alignment.center,
                 margin: EdgeInsets.symmetric(horizontal: 8),
                 padding: EdgeInsets.symmetric(horizontal: 10),
                 decoration: BoxDecoration(
-                  color:
-                      _isCurrentTap(dummy[index]) ? Colors.grey : Colors.white,
+                  color: _isCurrentTap(muscles[index])
+                      ? Colors.grey
+                      : Colors.white,
                   border: Border.all(
                     color: Colors.grey,
                     width: 2,
@@ -55,12 +59,12 @@ class _ScrolledTypesState extends State<ScrolledTypes> {
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: Text(
-                  dummy[index],
+                  muscles[index],
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 19,
                     fontWeight: FontWeight.bold,
-                    color: _isCurrentTap(dummy[index])
+                    color: _isCurrentTap(muscles[index])
                         ? Colors.white
                         : Colors.black,
                   ),
