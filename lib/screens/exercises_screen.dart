@@ -1,5 +1,6 @@
 import 'package:exfit/models/exercise.dart';
 import 'package:exfit/services/excercises_service.dart';
+import 'package:exfit/services/muscles_services.dart';
 import '../widgets/scrolled_types.dart';
 import 'package:flutter/material.dart';
 import '../widgets/exercise.dart';
