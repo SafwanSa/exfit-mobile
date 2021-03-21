@@ -41,7 +41,15 @@ class ExerciseWidget extends StatelessWidget {
                     children: [
                       ClipRRect(
                         borderRadius: BorderRadius.circular(10),
-                        child: Text(''),
+                        child: CachedNetworkImage(
+                          imageUrl: exercise.imagesUrls[0],
+                          placeholder: (context, url) => Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 53),
+                            child: CircularProgressIndicator(),
+                          ),
+                          errorWidget: (context, url, error) =>
+                              Icon(Icons.error),
+                        ),
                       ),
                       Container(
                         child: Column(

@@ -62,7 +62,8 @@ class _ExercisesScreenState extends State<ExercisesScreen> {
             children: [
               ScrolledTypes(),
               Expanded(
-                child: ListView.builder(
+                child: ListView.separated(
+                  separatorBuilder: (ctx, i) => SizedBox(height: 10),
                   padding: EdgeInsets.all(5),
                   itemBuilder: (context, index) {
                     if (index >= _exercises.length) {
