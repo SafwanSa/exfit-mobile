@@ -17,81 +17,75 @@ class ExerciseWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 115,
-      width: double.infinity,
       child: Card(
-          child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 10),
-        child: Row(
-          children: [
-            Expanded(
-              flex: 1,
-              child: Bounce(
+        child: Padding(
+          padding: const EdgeInsets.only(right: 20),
+          child: Stack(
+            children: [
+              Align(
+                alignment: Alignment.centerRight,
+                child: Bounce(
+                  onTap: () {},
+                  child: Icon(
+                    Icons.add_box_rounded,
+                    color: Theme.of(context).primaryColor,
+                    size: 40,
+                  ),
+                ),
+              ),
+              Bounce(
                 onTap: () {
                   showModalBottomSheet(
                       context: context,
-                      builder: (context) {
+                      builder: (ctx) {
                         return ExerciseDetailsSheet(
                           exercise: exercise,
                         );
                       });
                 },
-                child: Container(
-                  color: Colors.transparent,
-                  child: Row(
-                    children: [
-                      ClipRRect(
-                        borderRadius: BorderRadius.circular(10),
-                        child: CachedNetworkImage(
-                          imageUrl: exercise.imagesUrls[0],
-                          placeholder: (context, url) => Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 53),
-                            child: CircularProgressIndicator(),
-                          ),
-                          errorWidget: (context, url, error) =>
-                              Icon(Icons.error),
-                        ),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    SizedBox(
+                      width: 110,
+                      child: CachedNetworkImage(
+                        imageUrl: exercise.imagesUrls[0],
+                        placeholder: (context, url) =>
+                            new CircularProgressIndicator(),
+                        errorWidget: (context, url, error) =>
+                            new Icon(Icons.error),
                       ),
-                      Container(
+                    ),
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 10, right: 60),
                         child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            SizedBox(
-                              width: 200,
-                              child: Text(
-                                exercise.name,
-                                style: TextStyle(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold,
-                                ),
+                            Text(
+                              exercise.name,
+                              style: TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
                               ),
                             ),
-                            SizedBox(height: 15),
                             DifficultyLevel(
-                              length: 4,
-                              size: 13,
-                              percentage: exerciseController
-                                  .getPercentage(exercise.difficulty),
-                            ),
+                                size: 12,
+                                length: 5,
+                                percentage: exerciseController
+                                    .getPercentage(exercise.difficulty))
                           ],
                         ),
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
-              ),
-            ),
-            Bounce(
-              onTap: () {},
-              child: Icon(
-                Icons.add_box_rounded,
-                size: 45,
-                color: Theme.of(context).primaryColor,
-              ),
-            )
-          ],
+              )
+            ],
+          ),
         ),
-      )),
+      ),
     );
   }
 }
