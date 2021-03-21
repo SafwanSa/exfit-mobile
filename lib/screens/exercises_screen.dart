@@ -30,7 +30,7 @@ class _ExercisesScreenState extends State<ExercisesScreen> {
     print('load more data');
     _isLoading = true;
     _page++;
-    exercisesService.fetchData(5, _page).then((List<Exercise> fetchedList) {
+    exercisesService.fetchData(100, _page).then((List<Exercise> fetchedList) {
       if (fetchedList.isEmpty) {
         setState(() {
           _isLoading = false;

@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:exfit/animations/bounce.dart';
 import 'package:exfit/controllers/exercise.dart';
 import 'package:exfit/models/exercise.dart';
@@ -40,9 +41,7 @@ class ExerciseWidget extends StatelessWidget {
                     children: [
                       ClipRRect(
                         borderRadius: BorderRadius.circular(10),
-                        child: Image.network(
-                          exercise.imagesUrls[0],
-                        ),
+                        child: Text(''),
                       ),
                       Container(
                         child: Column(
