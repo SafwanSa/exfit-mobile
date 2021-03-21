@@ -46,14 +46,16 @@ class ExerciseWidget extends StatelessWidget {
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    SizedBox(
+                    Container(
                       width: 110,
+                      height: 110,
                       child: CachedNetworkImage(
                         imageUrl: exercise.imagesUrls[0],
-                        placeholder: (context, url) =>
-                            new CircularProgressIndicator(),
-                        errorWidget: (context, url, error) =>
-                            new Icon(Icons.error),
+                        placeholder: (context, url) => Padding(
+                          padding: const EdgeInsets.all(20),
+                          child: CircularProgressIndicator(),
+                        ),
+                        errorWidget: (context, url, error) => Icon(Icons.error),
                       ),
                     ),
                     Expanded(
@@ -65,6 +67,7 @@ class ExerciseWidget extends StatelessWidget {
                           children: [
                             Text(
                               exercise.name,
+                              maxLines: 2,
                               style: TextStyle(
                                 fontSize: 20,
                                 fontWeight: FontWeight.bold,
