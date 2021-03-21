@@ -59,8 +59,9 @@ class ExerciseWidget extends StatelessWidget {
                       ),
                     ),
                     Expanded(
-                      child: Padding(
-                        padding: const EdgeInsets.only(left: 10, right: 60),
+                      child: Container(
+                        color: Colors.transparent,
+                        margin: const EdgeInsets.only(left: 10, right: 40),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           crossAxisAlignment: CrossAxisAlignment.start,
