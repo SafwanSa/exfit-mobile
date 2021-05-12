@@ -1,8 +1,5 @@
 import 'package:exfit/models/exercise.dart';
-import 'package:exfit/providers/filter_provider.dart';
 import 'package:exfit/services/excercises_service.dart';
-import 'package:exfit/services/muscles_services.dart';
-import 'package:provider/provider.dart';
 import '../widgets/scrolled_types.dart';
 import 'package:flutter/material.dart';
 import '../widgets/exercise.dart';
@@ -15,6 +12,7 @@ class ExercisesScreen extends StatefulWidget {
 class _ExercisesScreenState extends State<ExercisesScreen> {
   final List<Exercise> _exercises = [];
   final ExercisesService exercisesService = ExercisesService();
+  String filter = '';
 
   bool _hasMore = false;
   bool _isLoading = false;
@@ -26,14 +24,14 @@ class _ExercisesScreenState extends State<ExercisesScreen> {
     _isLoading = true;
     _hasMore = true;
     super.initState();
+    _loadMore(filter: filter);
   }
 
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    FilterProvider typesFilter =
-        Provider.of<FilterProvider>(context, listen: false);
-    _loadMore(filter: typesFilter.type);
+  void setFilter({newFilter: String}) {
+    // print("dd");
+    setState(() {
+      _loadMore(filter: newFilter);
+    });
   }
 
   void _loadMore({filter: String}) {
@@ -59,9 +57,6 @@ class _ExercisesScreenState extends State<ExercisesScreen> {
 
   @override
   Widget build(BuildContext context) {
-    FilterProvider typesFilter = Provider.of<FilterProvider>(context);
-    String filter = typesFilter.type;
-
     return Scaffold(
         appBar: AppBar(
           title: Text('Exfit'),
@@ -75,13 +70,12 @@ class _ExercisesScreenState extends State<ExercisesScreen> {
         body: Container(
           child: Column(
             children: [
-              ScrolledTypes(),
+              ScrolledTypes(setFilter: setFilter),
               Expanded(
                 child: ListView.separated(
                   separatorBuilder: (ctx, i) => SizedBox(height: 10),
                   padding: EdgeInsets.all(5),
                   itemBuilder: (context, index) {
-                    filter = typesFilter.type;
                     if (index >= _exercises.length) {
                       if (!_isLoading) {
                         _loadMore(filter: filter);
