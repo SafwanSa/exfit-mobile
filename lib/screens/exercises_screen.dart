@@ -1,6 +1,8 @@
 import 'package:exfit/models/exercise.dart';
+import 'package:exfit/providers/filter_provider.dart';
 import 'package:exfit/services/excercises_service.dart';
 import 'package:exfit/services/muscles_services.dart';
+import 'package:provider/provider.dart';
 import '../widgets/scrolled_types.dart';
 import 'package:flutter/material.dart';
 import '../widgets/exercise.dart';
@@ -27,7 +29,7 @@ class _ExercisesScreenState extends State<ExercisesScreen> {
     _loadMore();
   }
 
-  void _loadMore() {
+  void _loadMore({filter: String}) {
     print('load more data');
     _isLoading = true;
     _page++;
@@ -40,7 +42,8 @@ class _ExercisesScreenState extends State<ExercisesScreen> {
       } else {
         setState(() {
           _isLoading = false;
-          _exercises.addAll(fetchedList);
+          _exercises.addAll(fetchedList
+              .where((ex) => filter == '' ? true : ex.muscleGroup == filter));
         });
       }
     });
@@ -48,6 +51,8 @@ class _ExercisesScreenState extends State<ExercisesScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final typesFilter = Provider.of<FilterProvider>(context);
+
     return Scaffold(
         appBar: AppBar(
           title: Text('Exfit'),
@@ -69,7 +74,7 @@ class _ExercisesScreenState extends State<ExercisesScreen> {
                   itemBuilder: (context, index) {
                     if (index >= _exercises.length) {
                       if (!_isLoading) {
-                        _loadMore();
+                        _loadMore(filter: typesFilter.type);
                       }
                       return Center(
                         child: CircularProgressIndicator(),
