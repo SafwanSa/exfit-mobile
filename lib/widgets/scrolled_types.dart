@@ -1,6 +1,8 @@
 import 'package:exfit/animations/bounce.dart';
+import 'package:exfit/providers/filter_provider.dart';
 import 'package:exfit/services/muscles_services.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class ScrolledTypes extends StatefulWidget {
   @override
@@ -31,6 +33,8 @@ class _ScrolledTypesState extends State<ScrolledTypes> {
 
   @override
   Widget build(BuildContext context) {
+    final type = Provider.of<FilterProvider>(context);
+
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8.0),
       child: SizedBox(
@@ -43,6 +47,7 @@ class _ScrolledTypesState extends State<ScrolledTypes> {
             return Bounce(
               onTap: () {
                 _changeCurrentTap(muscles[index]);
+                type.setType(newType: muscles[index]);
               },
               child: Container(
                 alignment: Alignment.center,

@@ -9,10 +9,11 @@ void main() {
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
+  final filterProvider = FilterProvider();
   @override
   Widget build(BuildContext context) {
-    return Provider(
-      create: (context) => FilterProvider(),
+    return ChangeNotifierProvider<FilterProvider>.value(
+      value: filterProvider,
       child: MaterialApp(
         title: 'Exfit',
         theme: ThemeData(

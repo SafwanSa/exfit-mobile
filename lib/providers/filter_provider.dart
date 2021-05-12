@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class FilterProvider with ChangeNotifier {
-  String _type = 'Chest';
+  String _type = '';
 
   String get type {
     return _type;

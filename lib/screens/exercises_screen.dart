@@ -26,11 +26,18 @@ class _ExercisesScreenState extends State<ExercisesScreen> {
     _isLoading = true;
     _hasMore = true;
     super.initState();
-    _loadMore();
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    FilterProvider typesFilter =
+        Provider.of<FilterProvider>(context, listen: false);
+    _loadMore(filter: typesFilter.type);
   }
 
   void _loadMore({filter: String}) {
-    print('load more data');
+    print('load more data: ');
     _isLoading = true;
     _page++;
     exercisesService.fetchData(100, _page).then((List<Exercise> fetchedList) {
@@ -42,6 +49,7 @@ class _ExercisesScreenState extends State<ExercisesScreen> {
       } else {
         setState(() {
           _isLoading = false;
+          _exercises.clear();
           _exercises.addAll(fetchedList
               .where((ex) => filter == '' ? true : ex.muscleGroup == filter));
         });
@@ -51,7 +59,8 @@ class _ExercisesScreenState extends State<ExercisesScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final typesFilter = Provider.of<FilterProvider>(context);
+    FilterProvider typesFilter = Provider.of<FilterProvider>(context);
+    String filter = typesFilter.type;
 
     return Scaffold(
         appBar: AppBar(
@@ -72,9 +81,10 @@ class _ExercisesScreenState extends State<ExercisesScreen> {
                   separatorBuilder: (ctx, i) => SizedBox(height: 10),
                   padding: EdgeInsets.all(5),
                   itemBuilder: (context, index) {
+                    filter = typesFilter.type;
                     if (index >= _exercises.length) {
                       if (!_isLoading) {
-                        _loadMore(filter: typesFilter.type);
+                        _loadMore(filter: filter);
                       }
                       return Center(
                         child: CircularProgressIndicator(),
